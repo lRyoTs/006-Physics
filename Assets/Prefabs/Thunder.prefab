@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2908308869779471292}
   - component: {fileID: 2908308869778375006}
   - component: {fileID: 2255719747175229157}
+  - component: {fileID: -6591272643857938129}
   m_Layer: 0
   m_Name: Thunder
   m_TagString: Powerup
@@ -97,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25041586, y: 0.7103969, z: 0.20007594}
   m_Center: {x: -0.019502308, y: -0.01479131, z: 0.000000007450581}
+--- !u!114 &-6591272643857938129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908308869780354618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f9ac9c6491e4448a75186277129c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

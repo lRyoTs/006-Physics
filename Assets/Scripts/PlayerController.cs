@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     private float forwardInput;
     private Rigidbody _rigidbody;
     private GameObject focalPoint;
+
     //GAME VARIABLES
     private bool hasPowerup = false;
-    private float powerupForce = 100f;
-    
+    private float powerupForce = 300f;
+    public bool isGameOver = false;
+    public ParticleSystem powerupParticle;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +36,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Powerup")) {
             StartCoroutine(PowerupCountDown());
             hasPowerup = true;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+            powerupParticle.Play();
         }
     }
 
@@ -49,5 +54,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PowerupCountDown() {
         yield return new WaitForSeconds(6);
         hasPowerup = false;
+        powerupParticle.Stop();
     }
 }

@@ -8,14 +8,14 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerupPrefab;
     private float spawnRange = 9f;
 
-    private float delayTime = 5f;
-    private float repeatRate = 10f;
+    //private float delayTime = 5f;
+    //private float repeatRate = 10f;
 
     // Update is called once per frame
     void Start()
     {
         Instantiate(enemyPrefab, RandomSpawnPosition(), Quaternion.identity);
-        InvokeRepeating("SpawnPowerUp", delayTime, repeatRate);
+        SpawnPowerUp();
     }
 
 
