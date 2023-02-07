@@ -14,13 +14,24 @@ public class PlayerController : MonoBehaviour
     private float powerupForce = 300f;
     public bool isGameOver = false;
     public ParticleSystem powerupParticle;
+    public GameObject[] powerupIndicators;
+
+    //Player Scale
+    private Vector3 normalScale;
+    private float increasedMass = 100f;
+    private float normalMass;
+    private float normalSpeed;
+    private float increasedSpeed = 200f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        normalScale = transform.localScale;
         _rigidbody = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        normalMass = _rigidbody.mass;
+        normalSpeed = speed;
     }
 
     // Update is called once per frame
@@ -29,6 +40,11 @@ public class PlayerController : MonoBehaviour
         forwardInput = Input.GetAxis("Vertical");
         //Follows the camera rotation axis
         _rigidbody.AddForce(focalPoint.transform.forward * speed * forwardInput);
+        
+        //Check if gameOver
+        if (transform.position.y < -5) {
+            isGameOver = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,7 +52,14 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Powerup")) {
             StartCoroutine(PowerupCountDown());
             hasPowerup = true;
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
+            powerupParticle.Play();
+        }
+
+        if (other.gameObject.CompareTag("Giga"))
+        {
+            StartCoroutine(GigaCountDown());
+            Destroy(other.gameObject);
             powerupParticle.Play();
         }
     }
@@ -52,8 +75,27 @@ public class PlayerController : MonoBehaviour
 
     //Coroutine of the active timer of the power up
     private IEnumerator PowerupCountDown() {
-        yield return new WaitForSeconds(6);
+        for (int i = 0; i < powerupIndicators.Length; i++) {
+            powerupIndicators[i].SetActive(true);
+            yield return new WaitForSeconds(2);
+            powerupIndicators[i].SetActive(false);
+        }
         hasPowerup = false;
+        powerupParticle.Stop();
+    }
+
+    //Coroutine of the active timer of the giga powerup
+    private IEnumerator GigaCountDown()
+    {
+        transform.localScale = Vector3.one * 3;
+        _rigidbody.mass = increasedMass;
+        speed = increasedSpeed;
+
+        yield return new WaitForSeconds(10);
+
+        speed = normalSpeed;
+        transform.localScale = normalScale;
+        _rigidbody.mass = normalMass;
         powerupParticle.Stop();
     }
 }

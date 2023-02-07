@@ -13,14 +13,13 @@ public class Powerup : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         StartCoroutine(ChangePos());
     }
 
     private IEnumerator ChangePos() {
         yield return new WaitForSeconds(timerPos);
-
         transform.position = RandomSpawnPosition();
         gameObject.SetActive(true);
     }

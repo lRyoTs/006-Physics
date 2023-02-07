@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    //Enemy Variables
     public GameObject enemyPrefab;
-    public GameObject powerupPrefab;
+    public int enemiesInScene;
+    public int enemiesPerWave = 0;
+
+    //Powerup Variables
+    public GameObject [] powerupPrefab;
     private float spawnRange = 9f;
 
-    //private float delayTime = 5f;
-    //private float repeatRate = 10f;
+    //Player
+    private PlayerController playerInfo; 
 
-    // Update is called once per frame
-    void Start()
+    private void Awake()
     {
-        Instantiate(enemyPrefab, RandomSpawnPosition(), Quaternion.identity);
-        SpawnPowerUp();
+        playerInfo = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if (!playerInfo.isGameOver) {
+
+            enemiesInScene = FindObjectsOfType<Enemy>().Length; //Get enemies in scene
+            if (enemiesInScene <= 0) {
+                SpawnEnemyWave(enemiesPerWave++); //Call and postincrement
+                SpawnPowerUp();
+            }
+        }
+
     }
 
 
@@ -27,6 +43,14 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void SpawnPowerUp() {
-        Instantiate(powerupPrefab, RandomSpawnPosition(), Quaternion.identity);
+        for (int i = 0; i < powerupPrefab.Length; i++) {
+            Instantiate(powerupPrefab[i], RandomSpawnPosition(), Quaternion.identity);
+        }
+    }
+
+    private void SpawnEnemyWave(int numEnemies) {
+        for (int i = 0; i < numEnemies; i++) {
+            Instantiate(enemyPrefab, RandomSpawnPosition(), Quaternion.identity);
+        }
     }
 }
