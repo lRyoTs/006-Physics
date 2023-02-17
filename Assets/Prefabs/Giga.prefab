@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9158786693316002129}
   - component: {fileID: 9158786693317033693}
   - component: {fileID: 2794838471942733557}
+  - component: {fileID: -6829239267524387845}
   m_Layer: 0
   m_Name: Giga
   m_TagString: Giga
@@ -97,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8617554, y: 0.8617494, z: 0.20007595}
   m_Center: {x: 0.000000014901161, y: 0.00000011920929, z: 0.000000014901161}
+--- !u!114 &-6829239267524387845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158786693315033735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f9ac9c6491e4448a75186277129c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

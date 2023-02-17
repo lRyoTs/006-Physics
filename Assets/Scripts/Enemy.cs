@@ -15,9 +15,12 @@ public class Enemy : MonoBehaviour
     private PlayerController playerInfo;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+    void Start()
+    {
         playerInfo = GameObject.Find("Player").GetComponent<PlayerController>();
         player = GameObject.Find("Player");
     }
